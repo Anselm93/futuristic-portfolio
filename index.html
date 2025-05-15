@@ -1,10 +1,9 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anselm Odo - Futuristic Portfolio</title>
+  <title>Anselm Odo - Portfolio</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- React and ReactDOM CDN -->
@@ -13,23 +12,21 @@
   <!-- Babel for JSX -->
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.6/babel.min.js"></script>
   <style>
-    /* Neon glow effect */
     .neon-text {
       color: #fff;
-      text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #f0f, 0 0 30px #f0f;
+      text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
     }
     .neon-border {
-      box-shadow: 0 0 10px #0ff, 0 0 20px #f0f;
+      box-shadow: 0 0 5px #0ff, 0 0 10px #f0f;
     }
     .dark-mode {
       background-color: #1a1a1a;
       color: #fff;
     }
     .light-mode {
-      background-color: #f0f0f0;
-      color: #333;
+      background-color: #e5e7eb;
+      color: #1f2937;
     }
-    /* Typing animation keyframes */
     @keyframes typing {
       from { width: 0; }
       to { width: 100%; }
@@ -42,7 +39,7 @@
       overflow: hidden;
       white-space: nowrap;
       border-right: 2px solid #0ff;
-      animation: typing 3s steps(20, end), blink 0.5s step-end infinite;
+      animation: typing 2s steps(12, end), blink 0.5s step-end infinite;
     }
   </style>
 </head>
@@ -54,8 +51,6 @@
 
     const Portfolio = () => {
       const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
-      const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-      const [errors, setErrors] = useState({});
 
       const toggleTheme = () => {
         const newTheme = theme === 'dark' ? 'light' : 'dark';
@@ -63,163 +58,63 @@
         localStorage.setItem('theme', newTheme);
       };
 
-      const handleInputChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-      };
-
-      const validateForm = () => {
-        const newErrors = {};
-        if (!formData.name) newErrors.name = 'Name is required';
-        if (!formData.email) newErrors.email = 'Email is required';
-        else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Invalid email';
-        if (!formData.message) newErrors.message = 'Message is required';
-        return newErrors;
-      };
-
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        const formErrors = validateForm();
-        if (Object.keys(formErrors).length === 0) {
-          alert('Form submitted successfully!');
-          setFormData({ name: '', email: '', message: '' });
-          setErrors({});
-        } else {
-          setErrors(formErrors);
-        }
-      };
-
       useEffect(() => {
         document.body.className = theme === 'dark' ? 'dark-mode' : 'light-mode';
       }, [theme]);
 
       return (
-        <div className="container mx-auto p-4 max-w-4xl">
+        <div className="container mx-auto p-3 max-w-xl">
           {/* Header */}
-          <header className="text-center py-8">
-            <h1 className="text-4xl md:text-5xl font-bold neon-text typing">Anselm Odo</h1>
-            <img 
-              src="DSC_3772.JPG" 
-              alt="Anselm Odo Profile Picture" 
-              className="w-24 h-24 md:w-32 md:h-32 rounded-full neon-border mx-auto mt-4" 
-            />
-            <p className="text-lg mt-2">Front-End Developer | Brno, Czech Rebulic</p>
-            <div className="mt-4 flex justify-center gap-4">
-              <a href="tel:+420778555966" className="text-cyan-400 hover:underline">+420778555966</a>
+          <header className="text-center py-3">
+            <h1 className="text-xl md:text-2xl font-bold neon-text typing">Anselm Odo</h1>
+            <p className="text-xs mt-1">Front-End Developer | Brno, Czech Republic</p>
+            <div className="mt-1 flex flex-wrap justify-center gap-2 text-xs">
               <a href="mailto:anselmikenna4us@gmail.com" className="text-cyan-400 hover:underline">anselmikenna4us@gmail.com</a>
-              <a href="https://github.com/[yourusername]" className="text-cyan-400 hover:underline">GitHub</a>
-              <a href="https://[yourusername].github.io/futuristic-portfolio" className="text-cyan-400 hover:underline">Portfolio</a>
+              <a href="https://github.com/yourusername" className="text-cyan-400 hover:underline">GitHub</a>
             </div>
             <button
               onClick={toggleTheme}
-              className="mt-4 px-4 py-2 bg-cyan-500 text-white rounded neon-border hover:bg-cyan-600 transition"
+              className="mt-1 px-2 py-1 bg-cyan-500 text-white rounded neon-border hover:bg-cyan-600 transition text-xs"
             >
-              Toggle {theme === 'dark' ? 'Light' : 'Dark'} Mode
+              {theme === 'dark' ? 'Light' : 'Dark'}
             </button>
           </header>
 
           {/* Objective */}
-          <section className="my-8">
-            <h2 className="text-2xl font-semibold neon-text">Objective</h2>
-            <p className="mt-2">
-              Enthusiastic self-taught front-end developer with skills in HTML, CSS, and JavaScript from Coursera, YouTube, and SoloLearn. Built a responsive portfolio website using GitHub Pages. Eager to contribute to web development projects and grow in an entry-level role.
+          <section className="my-3">
+            <h2 className="text-base font-semibold neon-text">Objective</h2>
+            <p className="mt-1 text-xs">
+              Self-taught front-end developer skilled in HTML, CSS, and JavaScript, seeking an entry-level role to grow and contribute.
             </p>
           </section>
 
           {/* Skills */}
-          <section className="my-8">
-            <h2 className="text-2xl font-semibold neon-text">Skills</h2>
-            <ul className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-2">
-              <li><strong>Technical:</strong> HTML, CSS, JavaScript</li>
-              <li><strong>Tools:</strong> Visual Studio Code, Git, GitHub, Chrome DevTools, W3C Markup Validator</li>
-              <li><strong>Concepts:</strong> Semantic HTML, CSS Flexbox, Responsive Design, Basic JavaScript (Variables, Functions, DOM Manipulation, Event Handling)</li>
-              <li><strong>Learning:</strong> Problem-Solving, Self-Directed Study, Attention to Detail</li>
-            </ul>
-          </section>
-
-          {/* Projects */}
-          <section className="my-8">
-            <h2 className="text-2xl font-semibold neon-text">Projects</h2>
-            <div className="mt-2">
-              <h3 className="text-xl font-medium">Futuristic Portfolio Website</h3>
-              <a href="https://github.com/[yourusername]/futuristic-portfolio" className="text-cyan-400 hover:underline">github.com/[yourusername]/futuristic-portfolio</a>
-              <ul className="list-disc ml-6">
-                <li>Created a neon-themed, responsive portfolio using HTML, CSS, and JavaScript, deployed on GitHub Pages.</li>
-                <li>Added interactive features: typing animation for name, dark/light theme toggle, and form validation.</li>
-                <li>Ensured clean code with W3C Markup Validator and tested responsiveness with Chrome DevTools.</li>
-              </ul>
-            </div>
-            <div className="mt-4">
-              <h3 className="text-xl font-medium">To-Do List Web App</h3>
-              <a href="https://github.com/[yourusername]/todo-list" className="text-cyan-400 hover:underline">github.com/[yourusername]/todo-list</a>
-              <ul className="list-disc ml-6">
-                <li>Developed a simple to-do list app with HTML, CSS (Flexbox), and JavaScript.</li>
-                <li>Enabled users to add and remove tasks with a responsive, user-friendly design.</li>
-                <li>Hosted on GitHub Pages and validated for accessibility.</li>
-              </ul>
+          <section className="my-3">
+            <h2 className="text-base font-semibold neon-text">Skills</h2>
+            <div className="mt-1 grid grid-cols-1 sm:grid-cols-2 gap-1 text-xs">
+              <p><strong>Technical:</strong> HTML, CSS, JavaScript</p>
+              <p><strong>Tools:</strong> VS Code, Git, GitHub</p>
+              <p><strong>Concepts:</strong> Semantic HTML, Flexbox, Responsive Design</p>
+              <p><strong>Soft Skills:</strong> Self-Learning, Attention to Detail</p>
             </div>
           </section>
 
           {/* Education */}
-          <section className="my-8">
-            <h2 className="text-2xl font-semibold neon-text">Education</h2>
-            <p className="mt-2">
+          <section className="my-3">
+            <h2 className="text-base font-semibold neon-text">Education</h2>
+            <p className="mt-1 text-xs">
               <strong>Self-Taught Front-End Development</strong> | 2022–2025<br />
-              Completed beginner courses on Coursera (HTML, CSS, JavaScript), SoloLearn (HTML, JavaScript), and YouTube tutorials (e.g., basic web development).
+              Courses on Coursera, SoloLearn, YouTube.
             </p>
           </section>
 
           {/* Certifications */}
-          <section className="my-8">
-            <h2 className="text-2xl font-semibold neon-text">Certifications</h2>
-            <ul className="mt-2 list-disc ml-6">
-              <li>HTML and CSS Fundamentals | SoloLearn | 2022</li>
-              <li>Introduction to JavaScript | Coursera | 2025</li>
+          <section className="my-3">
+            <h2 className="text-base font-semibold neon-text">Certifications</h2>
+            <ul className="mt-1 list-disc ml-4 text-xs">
+              <li>HTML and CSS Fundamentals, SoloLearn, 2022</li>
+              <li>Introduction to JavaScript, Coursera, 2025</li>
             </ul>
-          </section>
-
-          {/* Contact Form */}
-          <section className="my-8">
-            <h2 className="text-2xl font-semibold neon-text">Contact</h2>
-            <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-              <div>
-                <label className="block">Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full p-2 rounded bg-gray-800 text-white border border-cyan-500 neon-border"
-                />
-                {errors.name && <p className="text-red-400">{errors.name}</p>}
-              </div>
-              <div>
-                <label className="block">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full p-2 rounded bg-gray-800 text-white border border-cyan-500 neon-border"
-                />
-                {errors.email && <p className="text-red-400">{errors.email}</p>}
-              </div>
-              <div>
-                <label className="block">Message</label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  className="w-full p-2 rounded bg-gray-800 text-white border border-cyan-500 neon-border"
-                ></textarea>
-                {errors.message && <p className="text-red-400">{errors.message}</p>}
-              </div>
-              <button
-                type="submit"
-                className="px-4 py-2 bg-cyan-500 text-white rounded neon-border hover:bg-cyan-600 transition"
-              >
-                Submit
-              </button>
-            </form>
           </section>
         </div>
       );
@@ -229,4 +124,3 @@
   </script>
 </body>
 </html>
-```
